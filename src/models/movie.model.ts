@@ -27,6 +27,7 @@ export interface MovieModel {
             name: string
         }
     }
+
     movieGenre: {
         movieGenreId: number
         genre: {

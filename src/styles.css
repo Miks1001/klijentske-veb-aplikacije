@@ -14,4 +14,26 @@ a {
 body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
+
+}
+
+.container {
+    max-width: 80%;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+
+
+}
+
+.example-card {
+    max-width: 400px;
+}
+
+.loading {
+    text-align: center;
+    width: 700px;
+    height: 300px;
+
 }

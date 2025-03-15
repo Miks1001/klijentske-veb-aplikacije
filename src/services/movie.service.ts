@@ -22,8 +22,8 @@ export class MovieService {
             params: {
                 'size': size,
                 'page': page,
-                'sort': 'createdAt,asc',
-                'type': 'startDate'
+                'sort': 'startDate,asc',
+                'type': 'createdAt'
             }
         })
     }
