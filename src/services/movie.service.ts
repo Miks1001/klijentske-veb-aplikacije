@@ -20,8 +20,8 @@ export class MovieService {
             url: '/movie',
             method: 'GET',
             params: {
-                'size': size,
                 'page': page,
+                'size': size,
                 'sort': 'startDate,asc',
                 'type': 'createdAt'
             }

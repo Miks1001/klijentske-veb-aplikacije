@@ -8,7 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-home',
-  imports: [JsonPipe, NgIf, NgFor, MatButtonModule, MatCardModule],
+  imports: [NgIf, NgFor, MatButtonModule, MatCardModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -26,7 +26,7 @@ export class HomeComponent {
     return new Date(iso).toLocaleString('sr-RS')
   }
 
-  public generateDestinationImage(dest: string) {
-    return 'https://img.pequla.com/destination/${dest.split('; ')[0].toLowerCase()}.jpg'
+  public generateDestinationImage(dest: string) { //ovdje vidi za home.component.html
+    return 'https://s3proxygw.cineplexx.at/cms-live/asset/_default_upload_bucket('; ')[0].toLowerCase()}.jpg'
   }
 }
