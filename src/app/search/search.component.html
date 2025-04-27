@@ -42,7 +42,7 @@
                 <i class="fa-solid fa-hand"></i>Actions
             </th>
             <td mat-cell *matCellDef="let element">
-                <button mat-button>
+                <button mat-button [routerLink]="['/details/', element.movieId]">
                     <i class="fa-solid fa-arrow-up-right-from-square"></i>Details
                 </button>
                 <button mat-button>

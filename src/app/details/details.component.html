@@ -1,1 +1,58 @@
-<p>details works!</p>
+<body>
+    <div class="wrapper" *ngIf="movie">
+        <div class="movie-content">
+            <img [src]="movie.poster" [alt]="movie.title">
+            <mat-card class="movie-card" appearance="outlined">
+                <mat-card-content>
+                    <h2>{{movie.title}}</h2>
+                    <mat-list role="list">
+                        <mat-list-item>
+                            <span matListItemTitle>Release date:</span>
+                            <span matListItemLine>{{utils.formatDate(movie.startDate)}}</span>
+                            <span matListItemIcon>
+                                <i class="fa-solid fa-calendar-days"></i>
+                            </span>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <span matListItemTitle>Genre: </span>
+                            <span matListItemLine>
+                                <ng-container *ngFor="let genre of movie.movieGenre">
+                                    {{genre.genre.name}}
+                                </ng-container>
+                            </span>
+                            <span matListItemIcon>
+                                <i class="fa-solid fa-clapperboard"></i>
+                            </span>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <span matListItemTitle>Director:</span>
+                            <span matListItemLine>{{movie.director.name}}</span>
+                            <span matListItemIcon>
+                                <i class="fa-solid fa-user"></i>
+                            </span>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <span matListItemTitle>Actors:</span>
+                            <span matListItemLine>
+                                <ng-container *ngFor="let actor of movie.movieActors">
+                                    {{actor.actor.name}}
+                                </ng-container>
+                            </span>
+                            <span matListItemIcon>
+                                <i class="fa-solid fa-users"></i>
+                            </span>
+                        </mat-list-item>
+                    </mat-list>
+                    <span class="desc"><i class="fa-regular fa-circle-question"></i> Description: </span>
+                    <p class="desc">{{movie.description}}</p>
+
+                </mat-card-content>
+                <!-- <mat-card-actions>
+                    <a mat-button [routerLink]="['/details/'+movie.movieId+'/order']">
+                        <i class="fa-solid fa-cart-shopping"></i> Buy Tickets
+                    </a>
+                </mat-card-actions>-->
+            </mat-card>
+        </div>
+    </div>
+</body>
