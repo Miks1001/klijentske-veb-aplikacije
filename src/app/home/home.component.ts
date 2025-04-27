@@ -24,14 +24,21 @@ export class HomeComponent {
 
   constructor(public utils: UtilsService) {
     MovieService.getMovies(0, 3)
-      .then(rsp => this.movies = rsp.data) //.content na kraju
+      .then(rsp => {
+        this.movies = this.getRandomMovies(rsp.data, 3)
+      }) //.content na kraju
       .catch((e: AxiosError) => this.error = `${e.code}: ${e.message}`)
   }
-  public generateDestinationImage(dest: string) { //ovdje vidi za home.component.html
-    return `https://s3proxygw.cineplexx.at/cms-live/asset/_default_upload_bucket/${dest.split(' ')[0].toLowerCase()}.jpg`
-  }
 
-  public openDetails(id: number) {
 
+  public getRandomMovies(movies: MovieModel[], num: number) {
+    const randomIndexes: number[] = []
+    while (randomIndexes.length < num) {
+      const randomIndex = Math.floor(Math.random() * movies.length);
+      if (!randomIndexes.includes(randomIndex)) {
+        randomIndexes.push(randomIndex);
+      }
+    }
+    return randomIndexes.map(index => movies[index]);
   }
 }

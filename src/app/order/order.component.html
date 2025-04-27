@@ -1,0 +1,61 @@
+<div *ngIf="movie" class="bg-img">
+    <mat-card class="order-card" appearance="outlined">
+        <img mat-card-image [src]="movie.poster" [alt]="movie.title">
+        <mat-card-content>
+            <h3>New Order - {{movie.originalTitle}}</h3>
+            <mat-form-field class="full-width">
+                <mat-label>Movie Title:</mat-label>
+                <input type="text" matInput [value]="movie.originalTitle" disabled>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-label>Movie Length(in minutes):</mat-label>
+                <input type="text" matInput [value]="movie.runTime" disabled>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-label>Realese Date:</mat-label>
+                <input type="text" matInput [value]="utils.formatDate(movie.startDate)" disabled>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-label>Genres:</mat-label>
+                <input type="text" matInput [value]="findGenres(movie.movieId)" disabled>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-label>Projection Type:</mat-label>
+                <mat-select [(ngModel)]="selectedProjection">
+                    <mat-option *ngFor="let projection of projections"
+                        [value]="projection.id">{{projection.type}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-label>Choose price:</mat-label>
+                <mat-select [(ngModel)]="selectedPrice">
+                    <mat-option [value]="getPriceForType(selectedProjection)">{{getPriceForType(selectedProjection)}}
+                        RSD</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-label>VIP seats(+20% on price):</mat-label>
+                <mat-select [(ngModel)]="vipStatus">
+                    <mat-option [value]="true">Yes</mat-option>
+                    <mat-option [value]="false">No</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-label>Ticket Count:</mat-label>
+                <input type="number" matInput [(ngModel)]="numberOfTickets">
+            </mat-form-field>
+            <mat-form-field class="search-input">
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button (click)="doOrder()">
+                <i class="fa-solid fa-cart-shopping"></i> Order Now
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div>
