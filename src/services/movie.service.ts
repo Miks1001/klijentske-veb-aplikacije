@@ -15,7 +15,7 @@ const client = axios.create({
 
 
 export class MovieService {
-    static async getMovies(page: number = 0, size: number = 0) {
+    static async getMovies(page: number = 0, size: number = 10) {
         return client.request({
             url: '/movie',
             method: 'GET',
@@ -29,7 +29,7 @@ export class MovieService {
     }
 
     static async getMoviesById(id: number) {
-        return axios.get('/movie/' + id)
+        return axios.get(`/movie/${id}`)
     }
 }
 

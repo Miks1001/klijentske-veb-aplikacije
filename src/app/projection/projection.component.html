@@ -1,5 +1,5 @@
 <div class="wrapper" *ngIf="dataSource">
-    <h1>Search</h1>
+    <h1>Projctions</h1>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
         <!--- Note that these columns can be defined in any order.
@@ -14,7 +14,7 @@
         <!-- Name Column -->
         <ng-container matColumnDef="title">
             <th mat-header-cell *matHeaderCellDef>
-                <i class="fa-solid fa-ticket"></i>Title
+                <i class="fa-solid fa-ticket"></i> Title
             </th>
             <td mat-cell *matCellDef="let element"> {{element.Title}} </td>
         </ng-container>
@@ -22,38 +22,35 @@
         <!-- Weight Column -->
         <ng-container matColumnDef="startDate">
             <th mat-header-cell *matHeaderCellDef>
-                <i class="fa-solid fa-calendar-days"></i>Start Date
+                <i class="fa-solid fa-calendar-days"></i> Start Date
             </th>
             <td mat-cell *matCellDef="let element">
-                {{utils.formatDate(element.startDate?element.startDate:runTime)}}
+                {{element.startDate}}
             </td>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="runTime">
             <th mat-header-cell *matHeaderCellDef>
-                <i class="fa-solid fa-clock"></i>Run Time
+                <i class="fa-solid fa-clock"></i> Run Time
             </th>
             <td mat-cell *matCellDef="let element"> {{element.runTime}} </td>
         </ng-container>
 
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef>
-                <i class="fa-solid fa-hand"></i>Actions
+                <i class="fa-solid fa-hand"></i> Actions
             </th>
             <td mat-cell *matCellDef="let element">
-                <button mat-button>
+                <a mat-button>
                     <i class="fa-solid fa-arrow-up-right-from-square"></i>Details
-                </button>
-                <button mat-button>
-                    <i class="fa-solid fa-cart-shopping"></i>Reservation
-                </button>
+                </a>
             </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-</div>
 
-<app-loading *ngIf="!dataSource" />
+
+</div>
