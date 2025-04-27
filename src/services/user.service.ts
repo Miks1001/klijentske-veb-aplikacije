@@ -1,9 +1,9 @@
 import { OrderModel } from "../models/order.model"
 import { UserModel } from "../models/user.model"
 
-export class UtilsService {
+export class UserService {
 
-    static retriveUsers(): UserModel[] {
+    static retrieveUsers(): UserModel[] {
         if (!localStorage.getItem('users')) {
             const arr: UserModel[] = [
                 {

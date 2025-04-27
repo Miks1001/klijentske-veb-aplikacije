@@ -6,13 +6,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
-import { MovieModel } from '../models/movie.model';
-import { ProjectionModel } from '../models/projection.model';
-import { ProjectionService } from '../services/projection.service';
+import { MovieModel } from '../../models/movie.model';
+import { ProjectionModel } from '../../models/projection.model';
+import { ProjectionService } from '../../services/projection.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UtilsService } from '../services/utils.service';
-import { MovieService } from '../services/movie.service';
-import { UserService } from '../services/user.service';
+import { UtilsService } from '../../services/utils.service';
+import { MovieService } from '../../services/movie.service';
+import { UserService } from '../../services/user.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 
@@ -41,7 +41,7 @@ export class OrderComponent {
   public constructor(private route: ActivatedRoute, public utils: UtilsService, private router: Router) {
 
     route.params.subscribe(params => {
-      MovieService.getMovieById(params['id'])
+      MovieService.getMoviesById(params['id'])
         .then(rsp => this.movie = rsp.data)
     })
   }
@@ -51,7 +51,7 @@ export class OrderComponent {
     const genres: string[] = []
 
     if (id === this.movie?.movieId) {
-      for (let genre of this.movie.movieGenres) {
+      for (let genre of this.movie.movieGenre) {
         genres.push(genre.genre.name)
       }
     }

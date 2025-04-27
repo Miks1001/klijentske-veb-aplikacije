@@ -1,0 +1,23 @@
+.search-input {
+    width: 25%;
+}
+
+.search-card {
+    margin-bottom: 30px;
+    margin: 0 auto;
+    max-height: 200px;
+    width: 1000px;
+}
+
+.space {
+    padding-left: 10px;
+}
+
+mat-card-actions {
+    margin-top: auto;
+}
+
+.search-btn {
+    justify-content: end;
+    margin-top: -20px;
+}

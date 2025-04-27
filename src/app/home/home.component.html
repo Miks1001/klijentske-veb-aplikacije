@@ -14,15 +14,21 @@
             <h1>Title: {{movie.title}}</h1>
             <p>Starts at: {{utils.formatDate(movie.startDate)}}</p>
             <p>RunTime: {{(movie.runTime)}} min</p>
+            <p>Genre:
+                <ng-container *ngFor="let gen of movie.movieGenre">
+                    {{gen.genre.name}}&nbsp;
+                </ng-container>
+            </p>
+            <p>Director: {{movie.director.name}}</p>
 
         </mat-card-content>
         <mat-card-actions>
             <a mat-button [routerLink]="['/details/',movie.movieId]">
                 <i class="fa-solid fa-arrow-up-right-from-square"></i> Details
             </a>
-            <button mat-button>
+            <a mat-button [routerLink]="['/details/'+movie.movieId]">
                 <i class="fa-solid fa-cart-shopping"></i> Reservation
-            </button>
+            </a>
         </mat-card-actions>
     </mat-card>
 

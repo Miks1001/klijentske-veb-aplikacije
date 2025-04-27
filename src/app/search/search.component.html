@@ -1,59 +1,63 @@
-<div class="wrapper" *ngIf="dataSource">
-    <h1>Search</h1>
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<div *ngIf="dataSource" class="container-body">
+    <div class="wrapper" *ngIf="dataSource">
+        <h1>Search</h1>
+        <mat-card class="search-card">
+            <mat-card-content>
+                <mat-form-field class="full-width">
+                    <mat-label>Search</mat-label>
+                    <input type="text" matInput placeholder="Search movie" (keyup)="doFilterChain()"
+                        [(ngModel)]="userInput">
+                </mat-form-field>
+                <mat-form-field class="search-input">
+                    <mat-label>Select 1st genre:</mat-label>
+                    <mat-select (selectionChange)="doFilterChain()" [(ngModel)]="selectedGenre">
+                        <ng-container *ngFor="let gen of genreList">
+                            <mat-option [value]="gen.name">
+                                {{gen.name}}
+                            </mat-option>
+                        </ng-container>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="search-input space">
+                    <mat-label>Select 2nd genre:</mat-label>
+                    <mat-select (selectionChange)="doFilterChain()" [(ngModel)]="selectedGenre2">
+                        <ng-container *ngFor="let gen of genreList">
+                            <mat-option [value]="gen.name">
+                                {{gen.name}}
+                            </mat-option>
+                        </ng-container>
+                    </mat-select>
+                </mat-form-field>
 
-        <!--- Note that these columns can be defined in any order.
-              The actual rendered columns are set as a property on the row definition" -->
-
-        <!-- Position Column -->
-        <ng-container matColumnDef="movieId">
-            <th mat-header-cell *matHeaderCellDef> ID </th>
-            <td mat-cell *matCellDef="let element"> {{element.movieId}} </td>
-        </ng-container>
-
-        <!-- Name Column -->
-        <ng-container matColumnDef="title">
-            <th mat-header-cell *matHeaderCellDef>
-                <i class="fa-solid fa-ticket"></i>Title
-            </th>
-            <td mat-cell *matCellDef="let element"> {{element.Title}} </td>
-        </ng-container>
-
-        <!-- Weight Column -->
-        <ng-container matColumnDef="startDate">
-            <th mat-header-cell *matHeaderCellDef>
-                <i class="fa-solid fa-calendar-days"></i>Start Date
-            </th>
-            <td mat-cell *matCellDef="let element">
-                {{utils.formatDate(element.startDate?element.startDate:runTime)}}
-            </td>
-        </ng-container>
-
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="runTime">
-            <th mat-header-cell *matHeaderCellDef>
-                <i class="fa-solid fa-clock"></i>Run Time
-            </th>
-            <td mat-cell *matCellDef="let element"> {{element.runTime}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef>
-                <i class="fa-solid fa-hand"></i>Actions
-            </th>
-            <td mat-cell *matCellDef="let element">
-                <button mat-button [routerLink]="['/details/', element.movieId]">
-                    <i class="fa-solid fa-arrow-up-right-from-square"></i>Details
-                </button>
-                <button mat-button>
-                    <i class="fa-solid fa-cart-shopping"></i>Reservation
-                </button>
-            </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+                <mat-card-actions class="search-btn">
+                    <button mat-button (click)="doReset()">
+                        <i class="fa-solid fa-ban"></i> Reset Search
+                    </button>
+                </mat-card-actions>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <mat-card class="example-card" appearance="outlined" *ngFor="let movie of dataSource">
+        <img mat-card-image [src]="movie.poster" [alt]="movie.originalTitle">
+        <mat-card-content>
+            <h1>{{movie.originalTitle}}</h1>
+            <p>Realese Date: {{utils.formatDate(movie.startDate)}}</p>
+            <p>Genre:
+                <ng-container *ngFor="let gen of movie.movieGenre">
+                    {{gen.genre.name}}&nbsp;
+                </ng-container>
+            </p>
+            <p>Director: {{movie.director.name}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+            <a mat-button [routerLink]="['/details/', movie.movieId]">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> Details
+            </a>
+            <a mat-button [routerLink]="['/details/'+movie.movieId+'/order']">
+                <i class="fa-solid fa-cart-shopping"></i> Buy Tickets
+            </a>
+        </mat-card-actions>
+    </mat-card>
 </div>
 
 <app-loading *ngIf="!dataSource" />

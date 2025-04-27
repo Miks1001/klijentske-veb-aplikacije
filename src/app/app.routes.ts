@@ -6,6 +6,7 @@ import { ProjectionComponent } from './projection/projection.component';
 import { DetailsComponent } from './details/details.component';
 import { LoginComponent } from './login/login.component';
 
+
 export const routes: Routes = [
 
     { path: '', component: HomeComponent },

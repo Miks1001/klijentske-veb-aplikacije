@@ -28,6 +28,10 @@ export class MovieService {
         })
     }
 
+    static async  getGenres(){
+        return client.get('/genre')
+    }
+
     static async getMoviesById(id: number) {
         return axios.get(`/movie/${id}`)
     }
