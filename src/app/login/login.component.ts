@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterLink } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -17,15 +18,19 @@ export class LoginComponent {
   public email: string = ''
   public password: string = ''
 
-  public updateEmail(e: any) {
-    this.email = e.target.value
-  }
 
-  public updatePassword(e: any) {
-    this.password = e.target.value
+  constructor(private router: Router) {
+    if (UserService.getActiveUser()) {
+      router.navigate(['/user'])
+      return
+    }
   }
 
   public doLogin() {
-    alert(`${this.email} ${this.email}`)
+    if (UserService.login(this.email, this.password)) {
+      this.router.navigate(['/home'])
+      return
+    }
+    alert("Invalid credentials or User doesn't exist")
   }
 }

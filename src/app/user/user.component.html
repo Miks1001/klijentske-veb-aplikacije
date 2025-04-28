@@ -1,0 +1,235 @@
+<body>
+    <div class="wrapper" *ngIf="user">
+
+        <mat-card class="user-card" appearance="outlined">
+            <mat-card-header>
+                <img mat-card-avatar class="example-header-image"
+                    [src]="['https://ui-avatars.com/api/?name='+user.email]">
+                <mat-card-title>{{user.first_name}} {{user.last_name}}</mat-card-title>
+                <mat-card-subtitle>
+                    <p class="no-border">Total orders: {{user.orders.length}}</p>
+                    <p class="no-border">Favourite Genre: {{user.favouriteGenre}}</p>
+                </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content class="user-card-content">
+                <mat-accordion multi>
+                    <mat-expansion-panel *ngIf="user">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <i class="fa-solid fa-key"></i>&nbsp;Change Password
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-form-field class="full-width">
+                            <mat-label>Old password: </mat-label>
+                            <input matInput type="password" [(ngModel)]="oldPass" />
+                        </mat-form-field>
+                        <mat-form-field class="full-width">
+                            <mat-label>New password: </mat-label>
+                            <input matInput type="password" [(ngModel)]="newPass" />
+                        </mat-form-field>
+                        <mat-form-field class="full-width">
+                            <mat-label>Repeat password: </mat-label>
+                            <input matInput type="password" [(ngModel)]="repeatPass" />
+                        </mat-form-field>
+                        <button mat-button (click)="doChangePassword()">
+                            <i class="fa-solid fa-paper-plane"></i> Change
+                        </button>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel *ngIf="userCopy">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <i class="fa-solid fa-user-tag"></i>&nbsp;Update profile
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-form-field class="full-width">
+                            <mat-label>Email: </mat-label>
+                            <input matInput type="email" [(ngModel)]="userCopy.email" disabled />
+                        </mat-form-field>
+                        <mat-form-field class="full-width">
+                            <mat-label>First Name: </mat-label>
+                            <input matInput type="text" [(ngModel)]="userCopy.first_name" />
+                        </mat-form-field>
+                        <mat-form-field class="full-width">
+                            <mat-label>Last Name: </mat-label>
+                            <input matInput type="text" [(ngModel)]="userCopy.last_name" />
+                        </mat-form-field>
+                        <mat-form-field class="full-width">
+                            <mat-label>Phone: </mat-label>
+                            <input matInput type="tel" [(ngModel)]="userCopy.phone" />
+                        </mat-form-field>
+                        <mat-form-field class="full-width">
+                            <mat-label>Address: </mat-label>
+                            <input matInput type="text" [(ngModel)]="userCopy.address" />
+                        </mat-form-field>
+                        <mat-form-field class="full-width">
+                            <mat-label>Select Favourite Genre: </mat-label>
+                            <mat-select [(ngModel)]="userCopy.favouriteGenre">
+                                <mat-option *ngFor="let gen of genreList" [value]="gen.name">
+                                    {{gen.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button mat-button (click)="doUpdateUser()">
+                            <i class="fa-solid fa-paper-plane"></i> Update
+                        </button>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card appearance="outlined" *ngIf="user.orders.length == 0" class="no-order">
+            <mat-card-content>
+                <h1>You have no orders yet!</h1>
+                <p>To place an order visit the <a mat-button routerLink="/searh" class="cyan">search page</a></p>
+            </mat-card-content>
+        </mat-card>
+
+        <div *ngIf="user.orders.length > 0">
+            <div *ngIf="user.orders" class="table-margin">
+                <h1>Order List</h1>
+                <table mat-table [dataSource]="user.orders" class="mat-elevation-z8">
+
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef class="id">
+                            <i class="fa-solid fa-hashtag"></i> ID
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="id"> {{element.movieId}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="title">
+                        <th mat-header-cell *matHeaderCellDef class="title">
+                            <i class="fa-solid fa-tag"></i> Title:
+                        </th>
+                        <td mat-cell *matCellDef="let order" class="title"> {{order.title}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="projection">
+                        <th mat-header-cell *matHeaderCellDef class="projection">
+                            <i class="fa-solid fa-video"></i> Projection:
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="projection">
+                            {{element.projection}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="genre">
+                        <th mat-header-cell *matHeaderCellDef class="genre">
+                            <i class="fa-solid fa-clapperboard"></i> Genre:
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="genre">
+                            {{element.genre}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="date">
+                        <th mat-header-cell *matHeaderCellDef class="date">
+                            <i class="fa-solid fa-calendar-days"></i> Order Date:
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="date">
+                            {{element.reserveDate}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="vip">
+                        <th mat-header-cell *matHeaderCellDef class="vip">
+                            <i class="fa-solid fa-calendar-days"></i> Vip Seats:
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="vip">
+                            {{element.isVip ? 'Yes' : 'No'}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="price">
+                        <th mat-header-cell *matHeaderCellDef class="price">
+                            <i class="fa-solid fa-barcode"></i> Price:
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="price">
+                            {{element.pricePerItem}} RSD
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="tickets">
+                        <th mat-header-cell *matHeaderCellDef class="tickets">
+                            <i class="fa-solid fa-ticket"></i> Tickets:
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="tickets">
+                            {{element.numberOfTickets}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="total">
+                        <th mat-header-cell *matHeaderCellDef class="total">
+                            <i class="fa-solid fa-hand-holding-dollar"></i> Total Price:
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="total">
+                            {{(element.numberOfTickets * element.pricePerItem) * (element.isVip ? 1.2 : 1)}} RSD
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="status">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <i class="fa-regular fa-chart-bar"></i> Status
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            <div *ngIf="element.status == 'gledano' && element.rating == null">
+                                Gledano
+                            </div>
+                            <div *ngIf="element.status == 'gledano' && element.rating !== null">
+                                <ng-container *ngFor="let star of stars">
+                                    <i class="fa-solid fa-star"
+                                        [style.color]="star <= element.rating ? '#00dddd' : 'lightgray'"></i>
+                                </ng-container>
+                            </div>
+                            <div *ngIf="element.status == 'rezervisano'">
+                                Rezervisano
+                            </div>
+                            <div *ngIf="element.status == 'otkazano'">
+                                Otkazano
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="actions">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <i class="fa-solid fa-location-arrow"></i> Actions
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="actions">
+                            <a mat-button [routerLink]="['/details/', element.movieId]">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                <span class="link-name">Details</span>
+                            </a>
+                            <div *ngIf="element.status == 'rezervisano'">
+                                <button type="button" mat-button (click)="doPay(element)">
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                    <span class="link-name">Pay</span>
+                                </button>
+                                <button type="button" mat-button (click)="doCancel(element)">
+                                    <i class="fa-solid fa-ban"></i>
+                                    <span class="link-name">Cancel</span>
+                                </button>
+                            </div>
+                            <div *ngIf="element.status == 'gledano' && element.rating == null">
+                                <mat-form-field class="rate-select">
+                                    <mat-label>Select a rating:</mat-label>
+                                    <mat-select [(ngModel)]="selectedRating">
+
+                                        <mat-option *ngFor="let i of [1,2,3,4,5]" [value]="i"
+                                            aria-placeholder="Select Rating:">
+                                            {{i}} Stars
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <button class="rate-btn" type="button" mat-button (click)="doRating(element)">
+                                    Rate
+                                </button>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
