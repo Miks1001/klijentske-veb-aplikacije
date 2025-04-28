@@ -1,0 +1,30 @@
+.order-card {
+    max-width: 600px;
+    min-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.order-card img {
+    height: 600px;
+}
+
+.bg-img {
+    background-image: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%,
+            rgba(53, 105, 102, 0.38699229691876746) 0%, rgba(16, 21, 22, 0.7175245098039216) 100%,
+            rgba(9, 17, 16, 0.835171568627451) 100%), url('/assets/backgrund.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 30px;
+}
+
+mat-card-actions {
+    display: flex;
+    justify-content: end;
+    height: 40px;
+}
+
+mat-card-actions button {
+    font-size: 24px;
+    margin-bottom: 30px;
+}

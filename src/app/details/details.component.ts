@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MovieModel } from '../../models/movie.model';
 import { MovieService } from '../../services/movie.service';
 import { NgFor, NgIf } from '@angular/common';
@@ -10,7 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-details',
-  imports: [NgIf, NgFor, MatCardModule, MatListModule, MatButtonModule],
+  imports: [NgIf, NgFor, MatCardModule, MatListModule, MatButtonModule, RouterLink],
   templateUrl: './details.component.html',
   styleUrl: './details.component.css'
 })
