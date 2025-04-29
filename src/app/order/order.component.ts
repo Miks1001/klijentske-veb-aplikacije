@@ -17,8 +17,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 
 
-
-
 @Component({
   selector: 'app-order',
   imports: [NgIf, NgFor, MatButtonModule, MatCardModule, MatInputModule, MatSelectModule, MatFormFieldModule, FormsModule,
@@ -43,11 +41,10 @@ export class OrderComponent {
     route.params.subscribe(params => {
       MovieService.getMoviesById(params['id'])
         .then(rsp => this.movie = rsp.data)
-      console.log(this.movie)
     })
   }
 
-  public findGenres(id: number): string[] {
+  public findGenre(id: number): string[] {
 
     const genres: string[] = []
 
@@ -88,7 +85,7 @@ export class OrderComponent {
       id: new Date().getTime(),
       movieId: this.movie!.movieId,
       description: this.movie!.description,
-      genre: this.findGenres(this.movie!.movieId),
+      genre: this.findGenre(this.movie!.movieId),
       runTime: this.movie!.runTime,
       director: this.movie!.director.name,
       actors: this.findActors(this.movie!.movieId),

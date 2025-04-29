@@ -12,8 +12,8 @@
         <img mat-card-image [src]="movie.poster" [alt]="movie.poster"> <!--ovdje vidi-->
         <mat-card-content>
             <h1>Title: {{movie.title}}</h1>
-            <p>Starts at: {{utils.formatDate(movie.startDate)}}</p>
-            <p>RunTime: {{(movie.runTime)}} min</p>
+            <p>Starts: {{utils.formatDate(movie.startDate)}}</p>
+            <p>Run Time: {{(movie.runTime)}} min</p>
             <p>Genre:
                 <ng-container *ngFor="let gen of movie.movieGenre">
                     {{gen.genre.name}}
