@@ -43,6 +43,7 @@ export class OrderComponent {
     route.params.subscribe(params => {
       MovieService.getMoviesById(params['id'])
         .then(rsp => this.movie = rsp.data)
+      console.log(this.movie)
     })
   }
 

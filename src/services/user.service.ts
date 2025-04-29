@@ -17,7 +17,7 @@ export class UserService {
                     orders: []
                 }
             ]
-            localStorage.setItem('user', JSON.stringify(arr))
+            localStorage.setItem('users', JSON.stringify(arr))
         }
         return JSON.parse(localStorage.getItem('users')!)
     }

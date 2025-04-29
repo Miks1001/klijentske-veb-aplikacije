@@ -16,7 +16,7 @@
             <p>RunTime: {{(movie.runTime)}} min</p>
             <p>Genre:
                 <ng-container *ngFor="let gen of movie.movieGenre">
-                    {{gen.genre.name}}&nbsp;
+                    {{gen.genre.name}}
                 </ng-container>
             </p>
             <p>Director: {{movie.director.name}}</p>
@@ -26,8 +26,8 @@
             <a mat-button [routerLink]="['/details/',movie.movieId]">
                 <i class="fa-solid fa-arrow-up-right-from-square"></i> Details
             </a>
-            <a mat-button [routerLink]="['/details/'+movie.movieId]">
-                <i class="fa-solid fa-cart-shopping"></i> Reservation
+            <a mat-button [routerLink]="['/details/'+movie.movieId+'/order']">
+                <i class=" fa-solid fa-cart-shopping"></i> Reservation
             </a>
         </mat-card-actions>
     </mat-card>

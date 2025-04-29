@@ -8,6 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { UtilsService } from '../../services/utils.service';
 import { LoadingComponent } from "../loading/loading.component";
 import { RouterLink } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 
 @Component({
@@ -19,7 +20,7 @@ import { RouterLink } from '@angular/router';
 export class HomeComponent {
   public movies: MovieModel[] | null = null
   public error: string | null = null
-
+  public service = UserService
 
 
   constructor(public utils: UtilsService) {
